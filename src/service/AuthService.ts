@@ -28,7 +28,7 @@ export class AuthService {
             throw new AppError("La password debe ser texto", 400);
         }
 
-        // Quitamos espacios en blanco al inicio y al final de los datos
+        // Quitamos espacios en vacios
         const user = email.trim().toLowerCase();
         const pass = password.trim();
 

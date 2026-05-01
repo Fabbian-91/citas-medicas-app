@@ -1,5 +1,8 @@
 import { IsEmail, IsNotEmpty } from "class-validator";
 
+/**
+ * Metodo para validar los datos de login
+ */
 export class loginDto {
     //Validaciones de Dto para el email
     @IsEmail({}, { message: "Datos incorrectos al autenticarse" })

@@ -1,6 +1,9 @@
 import { IsBoolean, IsEmail, IsEnum, IsOptional, MaxLength, MinLength } from "class-validator";
 import { userRole } from "../../enum/Rol.enum";
 
+/**
+ * DTO para la actualización de un usuario, incluye validaciones para cada campo,email, password, role y estado
+ */
 export class UpdateUsuarioDto {
     //Validaciones de dto para actualizar el email
     @IsOptional()

@@ -1,5 +1,8 @@
 import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from "class-validator";
 
+/**
+ * DTO para la creación de una cita, incluye validaciones para cada campo, como el ID del paciente y medico, la fecha, hora, motivo y observaciones
+ */
 export class CreateCitaDto {
     //Validacion de dto para crear cita, paciente
     @IsNotEmpty({ message: "El ID del paciente es obligatorio" })

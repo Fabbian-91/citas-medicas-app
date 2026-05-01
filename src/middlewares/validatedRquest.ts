@@ -4,9 +4,7 @@ import { Request, Response, NextFunction } from "express";
 
 type ValidateConfig = {
     params?: new () => object;
-
     body?: new () => object;
-
     query?: new () => object;
 };
 
@@ -26,7 +24,7 @@ async function validatePart(
 
     DtoClass: new () => object,
 
-    options = { whitelist: true, forbidNonWhitelisted: false },
+    options = { whitelist: true, forbidNonWhitelisted: true },
 ) {
     const dto = plainToInstance(DtoClass, value);
 

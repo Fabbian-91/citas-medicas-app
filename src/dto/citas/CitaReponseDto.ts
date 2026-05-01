@@ -1,3 +1,8 @@
+/**
+ * DTO para la respuesta de una cita, incluye los datos de la cita, el paciente y el medico
+ * @param id
+ * @param fecha
+ */
 export class CitaResponseDto {
   id: number;
   fecha: string;

@@ -1,5 +1,8 @@
-import { IsOptional, IsString, MaxLength } from "class-validator";
+import { IsBoolean, IsOptional, IsString, MaxLength } from "class-validator";
 
+/**
+ * DTO para la actualización de un medico, incluye validaciones para cada campo, nombre, especialidad y el estado
+ */
 export class UpdateMedicoDto {
     //Validaciones del dto para actualizar, nombre
     @IsOptional()
@@ -15,6 +18,6 @@ export class UpdateMedicoDto {
 
     //Validaciones de dto para actualizar el estado
     @IsOptional()
-    @IsString({ message: "El estado debe ser verdadero o falso" })
+    @IsBoolean({ message: "El estado debe ser verdadero o falso" })
     estado?: boolean;
 }

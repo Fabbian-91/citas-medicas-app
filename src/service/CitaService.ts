@@ -1,5 +1,7 @@
 import { AppDataSource } from "../config/data-source";
 import { Cita } from "../entities/Cita";
+import { Medico } from "../entities/Medico";
+import { Paciente } from "../entities/Paciente";
 import { AppError } from "../errors/AppError";
 import { CitaMapper } from "../mappers/CitaMappper";
 
@@ -143,13 +145,13 @@ export class CitaService {
             throw new AppError("El motivo no puede estar vacío", 400);
         }
 
-        // Validamos que la fecha tenga formato YYYY-MM-DD
+        // Validamos que la fecha tenga formato
         const fechaRegex = /^\d{4}-\d{2}-\d{2}$/;
         if (!fechaRegex.test(fecha)) {
             throw new AppError("La fecha debe tener el formato YYYY-MM-DD", 400);
         }
 
-        // Validamos que la hora tenga formato HH:mm
+        // Validamos que la hora tenga formato
         const horaRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
         if (!horaRegex.test(hora)) {
             throw new AppError("La hora debe tener el formato HH:mm", 400);
@@ -176,10 +178,25 @@ export class CitaService {
         // Traemos el repositorio para interactuar con la base de datos
         const repo = AppDataSource.getRepository(Cita);
 
+        //Validar que no haya una cita con el mismo médico, fecha y hora
+        const citaExistente = await repo.findOne({
+            where: {
+                medico: { id: medicoId },
+                fecha,
+                hora,
+                estado: true
+            }
+        });
+
+        //Validar si existe la cita
+        if (citaExistente) {
+            throw new AppError("Ya existe una cita para ese médico en la fecha y hora seleccionadas", 400);
+        }
+
         // Creamos la cita con los datos por parámetro
         const cita = repo.create({
-            paciente: { id: pacienteId } as any,
-            medico: { id: medicoId } as any,
+            paciente: { id: pacienteId } as Paciente,
+            medico: { id: medicoId } as Medico,
             fecha,
             hora,
             motivo,

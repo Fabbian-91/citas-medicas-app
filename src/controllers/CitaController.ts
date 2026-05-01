@@ -112,6 +112,12 @@ export class CitaController {
         }
     };
 
+    /**
+     * Metodo para actualizar una cita, se valida que la cita exista, y que la fecha sea válida
+     * @param req 
+     * @param res 
+     * @returns 
+     */
     static patchCita = async (req: Request, res: Response) => {
         // Manejar excepciones
         try {

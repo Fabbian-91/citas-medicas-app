@@ -1,6 +1,9 @@
 import { IsEmail, IsEnum, IsNotEmpty, MaxLength, MinLength } from "class-validator";
 import { userRole } from "../../enum/Rol.enum";
 
+/**
+ * DTO para la creación de un usuario, incluye validaciones para cada campo, como el email, password y role
+ */
 export class CreateUsuarioDto {
     //Validaciones de dto para crear el email
     @MaxLength(50, { message: "El maximo de caracteres debe ser 100" })

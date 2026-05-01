@@ -1,5 +1,8 @@
 import { IsNotEmpty, IsString, MaxLength } from "class-validator";
 
+/**
+ * DTO para la creación de un paciente, incluye validaciones para cada campo, nombre, cedula y telefono
+ */
 export class CreatePacienteDto {
     //Validaciones del dto para crear parciente, nombre
     @IsNotEmpty({ message: "El nombre es obligatorio" })

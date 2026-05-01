@@ -1,6 +1,9 @@
 import { IsBoolean, IsNotEmpty, IsOptional, IsString, MaxLength } from "class-validator";
 
-export class CreatePacienteDto {
+/***
+ * DTO para la actualización de un paciente, incluye validaciones para cada campo, nombre, cedula, telefono y estado
+ */
+export class UpdatePacienteDto {
     //Validaciones del dto para actualizar parciente, nombre
     @IsOptional()
     @IsNotEmpty({ message: "El nombre es obligatorio" })

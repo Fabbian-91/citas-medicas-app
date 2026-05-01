@@ -4,6 +4,7 @@ import { Usuario } from "../entities/Usuario"
 import { UsuarioMapper } from "../mappers/UsuarioMapper";
 import { AppError } from "../errors/AppError";
 import { userRole } from "../enum/Rol.enum";
+import * as bcrypt from "bcryptjs";
 
 export class UsuarioService {
 
@@ -19,7 +20,7 @@ export class UsuarioService {
         const usuarios = await repo.find({ where: { estado: true } })
 
         //Devolvemos una lista con los datos mapeados
-        return UsuarioMapper.toResposeDtoList(usuarios);
+        return UsuarioMapper.toResponseDtoList(usuarios);
     }
 
     /**
@@ -113,10 +114,15 @@ export class UsuarioService {
             throw new AppError("El email ya está registrado", 409);
         }
 
+
+        //Generamos el hash de la contraseña
+        const contraseña = bcrypt.hashSync(password, 10);
+
+
         // Generamos el usuario con los datos por parámetro
         const usuario = repo.create({
             email,
-            password,
+            password: contraseña,
             role
         });
 
@@ -209,7 +215,10 @@ export class UsuarioService {
 
         // Actualizamos la contraseña solo si viene en el body
         if (usuario.password !== undefined) {
-            usuarioExiste.password = usuario.password;
+            // Generamos el hash de la nueva contraseña
+            const contraseña = bcrypt.hashSync(usuario.password, 10);
+            // Actualizamos la contraseña
+            usuarioExiste.password = contraseña;
         }
 
         // Actualizamos el role solo si viene en el body

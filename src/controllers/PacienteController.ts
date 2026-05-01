@@ -22,6 +22,7 @@ export class PacienteController {
             });
 
         } catch (error) {
+            // Manejo de errores internos
             return res.status(500).json({
                 message: "Error interno",
                 error: error instanceof Error ? error.message : String(error)
@@ -121,7 +122,7 @@ export class PacienteController {
             // Desestructuramos los datos del body
             const { nombre, cedula, telefono, estado } = req.body;
 
-            // Esperamos la respuesta del service para actualizar el paciente, y le pasamos el id enviado por parametro y los datos del body
+            // Esperamos la respuesta del service para actualizar el paciente
             const pacienteActualizado = await PacienteService.patchPaciente(String(req.params.id), { nombre, cedula, telefono, estado });
             
             // Retornamos el paciente actualizado con su estado

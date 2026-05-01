@@ -1,5 +1,8 @@
 import { IsBoolean, IsDateString, IsNumber, IsOptional, IsString, MaxLength } from "class-validator";
 
+/**
+ * DTO para la actualización de una cita, incluye validaciones para cada campo, como el ID del paciente y medico, la fecha, hora, motivo, estado y observaciones
+ */
 export class UpdateCitaDto {
     //Validacion de dto para actualizar cita, paciente
     @IsOptional()

@@ -1,14 +1,14 @@
-import { UsuarioResposeDto } from "../dto/usuarios/UsuarioResponseDto";
 import { Usuario } from "../entities/Usuario";
+import { UsuarioResponseDto } from "../dto/usuarios/UsuarioResponseDto";
 
 export class UsuarioMapper {
 
     /**
      * Metodo  para mappear el response de usuario
      * @param entity 
-     * @returns Usuario
+     * @returns UsuarioResponseDto
      */
-    static toResponseDto(entity: Usuario): UsuarioResposeDto {
+    static toResponseDto(entity: Usuario): UsuarioResponseDto {
         return {
             id: entity.id,
             userName: entity.email,
@@ -23,7 +23,7 @@ export class UsuarioMapper {
      * @param entities 
      * @returns UsuarioResponseDto[]
      */
-    static toResposeDtoList(entities: Usuario[]): UsuarioResposeDto[] {
+    static toResponseDtoList(entities: Usuario[]): UsuarioResponseDto[] {
         return entities.map(this.toResponseDto);
     }
 }
