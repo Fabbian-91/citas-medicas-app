@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Compiled output
@@ -77,3 +78,39 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+=======
+# =========================
+# Node Modules
+# =========================
+node_modules/
+
+# =========================
+# Variables de entorno
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Archivo conexión BD
+# =========================
+API/src/config/data-source.ts
+
+# =========================
+# Build TypeScript
+# =========================
+dist/
+build/
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# IDE
+# =========================
+.vscode/
+.idea/
+>>>>>>> 5fa55e9d808e28ede612d2e01e939d68879ced07
