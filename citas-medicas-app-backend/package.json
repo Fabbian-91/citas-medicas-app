@@ -1,0 +1,53 @@
+{
+  "name": "citas-medicas-app",
+  "version": "1.0.0",
+  "description": "Sistema web para la gestión de citas médicas con Angular, Express, TypeORM y MySQL.",
+  "main": "dist/app.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only ./src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabbian-91/citas-medicas-app.git"
+  },
+  "keywords": [
+    "citas-medicas",
+    "express",
+    "typeorm",
+    "mysql",
+    "angular",
+    "jwt"
+  ],
+  "author": "Fabian",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Fabbian-91/citas-medicas-app/issues"
+  },
+  "homepage": "https://github.com/Fabbian-91/citas-medicas-app#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.22.3",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.28"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.6.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^6.0.3"
+  }
+}
