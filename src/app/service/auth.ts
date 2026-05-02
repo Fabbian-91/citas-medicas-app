@@ -1,4 +1,4 @@
-import { HttpClient,HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { computed, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { enviorment } from '../../enviormets';
 import { Observable } from 'rxjs';
@@ -66,7 +66,7 @@ export class Auth {
       return;
     }
 
-    // El token final se obtiene de la signal, del body o del localStorage
+    // El token final se obtiene del parametro, del body o del localStorage
     const tokenFinal =
       token ||
       body.token ||
@@ -81,9 +81,26 @@ export class Auth {
     // Guardamos el token en localStorage
     localStorage.setItem('token', tokenFinal);
 
-    // Guardamos otros datos útiles del usuario
-    localStorage.setItem('usuario', body.usuario.nombre);
-    localStorage.setItem('rol', body.usuario.rol);
+    // Obtenemos el usuario y su rol
+    const usuario = body.usuario;
+    const rol = body.usuario?.rol;
+
+    // Validamos el usuario
+    if (usuario) {
+      // Guardamos datos de usuario
+      localStorage.setItem('usuario', usuario.email);
+      localStorage.setItem('id', usuario.id.toString());
+    } else {
+      console.warn('No se recibió usuario en la respuesta');
+    }
+
+    // Validamos el rol
+    if (rol) {
+      // Guardamos el rol del usuario
+      localStorage.setItem('rol', rol);
+    } else {
+      console.warn('No se recibió rol en la respuesta');
+    }
 
     // Actualizamos la signal con el token final
     this.tokenSignal.set(tokenFinal);
@@ -94,15 +111,13 @@ export class Auth {
    */
   logout(): void {
 
-    // Solo usamos localStorage si estamos en navegador
+    //Seteamos el itm del login
+    this.tokenSignal.set(null);
+
+    //Remover de local storage
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
-      localStorage.removeItem('usuario');
-      localStorage.removeItem('rol');
     }
-
-    // Limpiamos la signal
-    this.tokenSignal.set(null);
   }
 
   /**

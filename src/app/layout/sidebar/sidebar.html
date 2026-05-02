@@ -1,0 +1,46 @@
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo-box">
+      <mat-icon>local_hospital</mat-icon>
+    </div>
+
+    <div class="brand-text">
+      <h2>Clínica</h2>
+      <p>Vida Sana</p>
+    </div>
+  </div>
+
+  <nav class="sidebar-menu">
+    <a class="menu-item" routerLink="/dashboard" routerLinkActive="active">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
+    </a>
+
+    <a class="menu-item" routerLink="/pacientes" routerLinkActive="active">
+      <mat-icon>groups</mat-icon>
+      <span>Pacientes</span>
+    </a>
+
+    <a class="menu-item" routerLink="/medicos" routerLinkActive="active">
+      <mat-icon>medical_services</mat-icon>
+      <span>Médicos</span>
+    </a>
+
+    <a class="menu-item" routerLink="/citas" routerLinkActive="active">
+      <mat-icon>calendar_month</mat-icon>
+      <span>Citas</span>
+    </a>
+
+    <a class="menu-item" routerLink="/usuarios" routerLinkActive="active">
+      <mat-icon>manage_accounts</mat-icon>
+      <span>Usuarios</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button mat-button class="menu-item logout" (click)="cerrar()">
+      <mat-icon>logout</mat-icon>
+      <span>Cerrar sesión</span>
+    </button>
+  </div>
+</aside>

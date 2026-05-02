@@ -4,10 +4,10 @@ export interface LoginModel {
 }
 
 export interface LoginResponse {
+    message: string;
     token: string;
     usuario: {
         id: number;
-        nombre: string;
         email: string;
         rol: string;
     };

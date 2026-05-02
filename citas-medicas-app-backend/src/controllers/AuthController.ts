@@ -15,12 +15,17 @@ export class AuthController {
             const { email, password } = req.body;
 
             //Esperamos la respuesta del service para el login, 
-            const token = await AuthService.login(email, password);
+            const loginResponse = await AuthService.login(email, password);
 
             //retornamos el token generado con su estado
             return res.status(200).json({
                 message: "Login exitoso",
-                token: token
+                token: loginResponse.token,
+                usuario: {
+                    id: loginResponse.user.id,
+                    email: loginResponse.user.email,
+                    rol: loginResponse.role
+                }
             });
         } catch (error) {
             //Manejo de errores con AppError
@@ -30,7 +35,7 @@ export class AuthController {
                     error: error.message
                 });
             }
-            
+
             //Manejo de errores internos
             return res.status(500).json({
                 message: "Error interno",

@@ -1,11 +1,11 @@
-export interface Usuario {
+export interface UsuarioModel{
     id?: number;
-    email: string;
+    userName: string;
     role: string;
     estado: boolean;
 }
 
 export interface usuarioApiResponse {
     message: string,
-    data: Usuario[]
+    data: UsuarioModel[]
 }

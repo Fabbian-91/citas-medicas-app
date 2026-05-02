@@ -1,4 +1,4 @@
-export interface Paciente{
+export interface PacienteModel{
     id?:number;
     nombre:string;
     cedula:string;
@@ -8,5 +8,5 @@ export interface Paciente{
 
 export interface pacienteApiResponse{
     message:string;
-    data:Paciente[];
+    data:PacienteModel[];
 }

@@ -1,1 +1,73 @@
-<p>login works!</p>
+<div class="login-page">
+  <mat-card class="login-card">
+    <section class="brand-section">
+      <div class="brand-content">
+        <div class="logo-circle">
+          <mat-icon>local_hospital</mat-icon>
+        </div>
+
+        <h1>Clínica Vida Sana</h1>
+        <p>Sistema de Citas Médicas</p>
+
+        <div class="brand-message">
+          <mat-icon>calendar_month</mat-icon>
+          <span>Gestiona pacientes, médicos y citas de forma segura.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <div class="form-header">
+        <h2>Bienvenido</h2>
+        <p>Ingresa tus credenciales para continuar</p>
+      </div>
+
+      <form class="login-form" [formGroup]="login" (ngSubmit)="autentificar()">
+        <div class="custom-field">
+          <label for="email">Correo electrónico</label>
+
+          <!-- El error solo aparece cuando el usuario toca el campo y no cumple con las validaciones -->
+          <div class="input-box" [class.input-error]="login.get('email')?.touched && login.get('email')?.invalid">
+            <input id="email" type="email" placeholder="usuario@clinica.com" formControlName="email">
+            <mat-icon>mail_outline</mat-icon>
+          </div>
+
+          <!-- Directiva para validar que el correo electrónico es obligatorio -->
+          @if (login.get('email')?.touched && login.get('email')?.hasError('required')) {
+          <small class="error-message">El correo electrónico es obligatorio</small>
+          }
+
+          <!-- Directiva para validar que el correo electrónico tiene un formato válido -->
+          @if (login.get('email')?.touched && login.get('email')?.hasError('email')) {
+          <small class="error-message">Correo electrónico inválido</small>
+          }
+        </div>
+
+        <div class="custom-field">
+          <label for="password">Contraseña</label>
+
+          <!-- El error solo aparece cuando el usuario toca el campo y no cumple con las validaciones -->
+          <div class="input-box" [class.input-error]="login.get('password')?.touched && login.get('password')?.invalid">
+            <input id="password" type="password" placeholder="Ingresa tu contraseña" formControlName="password">
+            <mat-icon>lock_outline</mat-icon>
+          </div>
+
+          <!-- Directiva para validar que la contraseña es obligatoria -->
+          @if (login.get('password')?.touched && login.get('password')?.hasError('required')) {
+          <small class="error-message">La contraseña es obligatoria</small>
+          }
+
+          <!-- Directiva para validar que la contraseña tiene al menos 6 caracteres -->
+          @if (login.get('password')?.touched && login.get('password')?.hasError('minlength')) {
+          <small class="error-message">La contraseña debe tener al menos 6 caracteres</small>
+          }
+        </div>
+
+        <!-- Boton de iniciar sesión, se deshabilita si el formulario no es válido, evento submit para llamar a la función de autentificar -->
+        <button mat-raised-button class="login-button" type="submit" [disabled]="login.invalid">
+          Iniciar sesión
+        </button>
+      </form>
+    </section>
+  </mat-card>
+</div>

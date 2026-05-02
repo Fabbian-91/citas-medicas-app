@@ -6,7 +6,7 @@ export const enviorment = {
         pacientes: 'api/pacientes',
         medicos: 'api/medicos',
         usuarios: 'api/usuarios',
-        auth: 'api/auth/login',
+        auth: 'api/auth',
         dashboard: 'api/dashboard'
     }
 };

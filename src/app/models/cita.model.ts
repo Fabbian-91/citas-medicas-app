@@ -1,9 +1,9 @@
-export interface Cita{
+export interface CitaModel{
     id?:number;
     fecha:string;
     hora:string;
     motivo:string;
-    estoda:boolean;
+    estado:boolean;
     observaciones?:string | null;
     paciente:{
         id?:number;
@@ -20,5 +20,5 @@ export interface Cita{
 
 export interface citaApiReponse{
     message:string;
-    data:Cita[];
+    data:CitaModel[];
 }

@@ -1,0 +1,102 @@
+:host {
+  display: block;
+  height: 104px;
+}
+
+.header {
+  height: 100%;
+  padding: 0 32px;
+  background: #ffffff;
+  border-bottom: 1px solid #d8f2f3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.title-box h1 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.2;
+  color: #168c94;
+  font-weight: 700;
+}
+
+.title-box p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #7a8a8f;
+}
+
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-info {
+  text-align: right;
+}
+
+.user-info span {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #244b50;
+}
+
+.user-info small {
+  display: block;
+  margin-top: 3px;
+  color: #7a8a8f;
+  font-size: 12px;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 14px;
+  background: #e1f8fb;
+  color: #168c94;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 600px) {
+  :host {
+    height: auto;
+  }
+
+  .header {
+    min-height: 96px;
+    padding: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .title-box h1 {
+    font-size: 22px;
+  }
+
+  .title-box p {
+    font-size: 13px;
+  }
+
+  .user-box {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .user-info {
+    text-align: left;
+  }
+}

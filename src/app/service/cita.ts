@@ -18,7 +18,7 @@ export class Cita {
    * Metodo para obtener las citas, devuelve un Observable con la respuesta de la consulta
    * @returns 
    */
-  getPaciente(): Observable<citaApiReponse> {
+  getCita(): Observable<citaApiReponse> {
     // Obtenemos el token de autenticación del localStorage
     const token = localStorage.getItem('token') || '';
     // Creamos los headers con el token para la autenticación
@@ -27,25 +27,25 @@ export class Cita {
     return this.http.get<citaApiReponse>(this.URL, { headers });
   }
 
-  getPacienteById(id: number): Observable<citaApiReponse> {
+  getCitaById(id: number): Observable<citaApiReponse> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders(token);
     return this.http.get<citaApiReponse>(`${this.URL}/${id}`, { headers });
   }
 
-  postPaciente(c:Cita): Observable<citaApiReponse> {
+  postCita(c:Cita): Observable<citaApiReponse> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders(token);
     return this.http.post<citaApiReponse>(this.URL, c, { headers });
   }
 
-  patchPaciente(id: number, c: Cita): Observable<citaApiReponse> {
+  patchCita(id: number, c: Cita): Observable<citaApiReponse> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders(token);
     return this.http.patch<citaApiReponse>(`${this.URL}/${id}`, c, { headers });
   }
 
-  deletePaciente(id: number): Observable<citaApiReponse> {
+  deleteCita(id: number): Observable<citaApiReponse> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders(token);
     return this.http.delete<citaApiReponse>(`${this.URL}/${id}`, { headers });

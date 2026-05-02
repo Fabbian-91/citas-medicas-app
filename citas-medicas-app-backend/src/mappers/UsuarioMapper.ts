@@ -13,7 +13,6 @@ export class UsuarioMapper {
             id: entity.id,
             userName: entity.email,
             role: entity.role,
-            password: entity.password,
             estado: entity.estado
         };
     }

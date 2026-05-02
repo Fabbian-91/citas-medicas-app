@@ -1,4 +1,4 @@
-export interface Medico {
+export interface MedicoModel{
     id?: number;
     nombre: string;
     especialidad: string;
@@ -7,5 +7,5 @@ export interface Medico {
 
 export interface medicoApiResponse {
     message: string;
-    data: Medico[];
+    data: MedicoModel[];
 }
