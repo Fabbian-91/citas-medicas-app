@@ -10,7 +10,7 @@ export class Usuario {
     @Column({ length: 50, nullable: false, unique: true })
     email: string;
 
-    @Column({ type: "varchar", length: 100, nullable: false })
+    @Column({ type: "varchar", length: 100, nullable: false,select:false})
     password: string;
 
     @Column({ type: "enum", enum: userRole, nullable: false, default: userRole.RECEPCIONISTA })

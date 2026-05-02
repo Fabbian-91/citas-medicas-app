@@ -151,15 +151,45 @@ export class CitaService {
             throw new AppError("La fecha debe tener el formato YYYY-MM-DD", 400);
         }
 
+        // Validamos que la fecha sea una fecha real
+        const fechaDate = new Date(`${fecha}T00:00:00`);
+
+        if (isNaN(fechaDate.getTime())) {
+            throw new AppError("La fecha no es válida", 400);
+        }
+
+        // Validamos que no se puedan agendar citas sábado ni domingo
+        const diaSemana = fechaDate.getDay();
+
+        if (diaSemana === 0 || diaSemana === 6) {
+            throw new AppError("No se pueden agendar citas los sábados ni domingos", 400);
+        }
+
         // Validamos que la hora tenga formato
         const horaRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
         if (!horaRegex.test(hora)) {
             throw new AppError("La hora debe tener el formato HH:mm", 400);
         }
 
-        // Validamos que el motivo no supere los 255 caracteres
-        if (motivo.length > 255) {
-            throw new AppError("El motivo no puede superar los 255 caracteres", 400);
+        // Validamos que no se pueda agendar antes de las 6:00 
+        const [horaNumero, minutosNumero] = hora.split(":").map(Number);
+        if (
+            horaNumero < 6 ||
+            (horaNumero === 6 && minutosNumero > 0)
+        ) {
+            throw new AppError("Solo se pueden agendar citas despues las 6:00 AM", 400);
+        }
+
+        // Validamos que no se pueda agendar una cita el mismo día después de las 4:00 PM
+        const ahora = new Date();
+        const fechaCita = new Date(`${fecha}T${hora}:00`);
+        const esMismoDia =
+            fechaCita.getFullYear() === ahora.getFullYear() &&
+            fechaCita.getMonth() === ahora.getMonth() &&
+            fechaCita.getDate() === ahora.getDate();
+
+        if (esMismoDia && ahora.getHours() >= 16) {
+            throw new AppError("No se pueden agendar citas para el mismo día después de las 4:00 PM", 400);
         }
 
         // Validamos observaciones solo si viene en el body
@@ -261,9 +291,21 @@ export class CitaService {
             }
 
             // Validamos que la fecha sea una fecha real
-            const fechaDate = new Date(citaData.fecha);
+            const [anio, mes, dia] = citaData.fecha.split("-").map(Number);
+            //sacamos la fecha
+            const fechaDate = new Date(anio, mes - 1, dia);
+
+            //validamos que la fecha sea válida
             if (isNaN(fechaDate.getTime())) {
                 throw new AppError("La fecha no es válida", 400);
+            }
+
+            // Validamos que no se puedan agendar citas sábado ni domingo
+            const diaSemana = fechaDate.getDay();
+
+            //Validamos que el dia de la semana no sea sábado ni domingo
+            if (diaSemana === 0 || diaSemana === 6) {
+                throw new AppError("No se pueden agendar citas los sábados ni domingos", 400);
             }
         }
 
@@ -285,6 +327,15 @@ export class CitaService {
             const horaRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
             if (!horaRegex.test(citaData.hora)) {
                 throw new AppError("La hora debe tener el formato HH:mm", 400);
+            }
+
+            // Validamos que no se pueda agendar antes de las 6:00 AM ni después de las 5:00 PM
+            const [horaNumero, minutosNumero] = citaData.hora.split(":").map(Number);
+            if (
+                horaNumero < 6 ||
+                (horaNumero === 6 && minutosNumero > 0)
+            ) {
+                throw new AppError("Solo se pueden agendar citas despues las 6:00 AM", 400);
             }
         }
 
@@ -350,6 +401,22 @@ export class CitaService {
         // Validamos que la cita exista
         if (!citaExistente) {
             throw new AppError("La cita no existe", 404);
+        }
+
+        // Obtenemos la fecha y hora final que tendrá la cita
+        const fechaFinal = citaData.fecha !== undefined ? citaData.fecha : citaExistente.fecha;
+        const horaFinal = citaData.hora !== undefined ? citaData.hora : citaExistente.hora;
+
+        // Validamos que no se pueda agendar una cita el mismo día después de las 4:00 PM
+        const ahora = new Date();
+        const fechaCita = new Date(`${fechaFinal}T${horaFinal}:00`);
+        const esMismoDia =
+            fechaCita.getFullYear() === ahora.getFullYear() &&
+            fechaCita.getMonth() === ahora.getMonth() &&
+            fechaCita.getDate() === ahora.getDate();
+
+        if (esMismoDia && ahora.getHours() >= 16) {
+            throw new AppError("No se pueden agendar citas para el mismo día después de las 4:00 PM", 400);
         }
 
         // Actualizamos la fecha solo si viene en el body

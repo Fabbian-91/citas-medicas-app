@@ -4,7 +4,6 @@
 export class UsuarioResponseDto {
     id: number;
     userName: string;
-    password: string;
     role: string;
     estado: boolean;
 }

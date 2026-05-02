@@ -51,12 +51,12 @@ export class AuthService {
         const repo = AppDataSource.getRepository(Usuario);
 
         // Validamos que el usuario exista y esté activo
-        const userActive = await repo.findOne({
-            where: {
-                email: user,
-                estado: true
-            }
-        });
+        const userActive = await repo
+            .createQueryBuilder('usuario')
+            .addSelect('usuario.password')
+            .where('usuario.email = :email', { email: user })
+            .andWhere('usuario.estado = :estado', { estado: true })
+            .getOne();
 
         // Validamos que el usuario exista
         if (!userActive) {
