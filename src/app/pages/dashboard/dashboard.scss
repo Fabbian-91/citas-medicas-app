@@ -6,31 +6,172 @@
 
 .dashboard-card {
   width: 100%;
+  max-width: 100%;
   background: #ffffff;
   border: 1px solid #d8f2f3;
   border-radius: 22px;
   padding: 28px;
   box-shadow: 0 14px 34px rgba(0, 160, 180, 0.08);
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 /* CARDS */
 .container-Card {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
   width: 100%;
   box-sizing: border-box;
 }
 
 .example-card {
-  flex: 0 0 calc((100% - 48px) / 4);
-  max-width: calc((100% - 48px) / 4);
+  position: relative;
+  min-height: 138px;
+  border-radius: 20px !important;
+  border: 1px solid #cfeff2 !important;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfeff 100%) !important;
+  box-shadow: 0 10px 26px rgba(0, 160, 180, 0.08);
   box-sizing: border-box;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.example-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(0, 160, 180, 0.14);
+}
+
+.example-card mat-card-header {
+  padding: 22px 22px 10px 22px;
+}
+
+.example-card mat-card-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #082f38;
+  letter-spacing: -0.2px;
 }
 
 .example-card-footer {
+  padding: 6px 22px 22px 22px;
+}
+
+.example-card-footer mat-chip-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+/* CHIPS BASE */
+.example-card-footer mat-chip {
+  min-height: 34px;
+  padding-inline: 12px;
+  border-radius: 999px !important;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  background: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  --mdc-chip-container-shape-radius: 999px;
+  --mdc-chip-elevated-container-color: transparent;
+  --mdc-chip-flat-container-color: transparent;
+  --mdc-chip-outline-color: transparent;
+  --mdc-chip-disabled-outline-color: transparent;
+  --mdc-chip-label-text-color: currentColor;
+  --mdc-chip-with-icon-icon-color: currentColor;
+  --mdc-chip-with-trailing-icon-trailing-icon-color: currentColor;
+}
+
+/* Borde personalizado por posición */
+.example-card-footer mat-chip:nth-child(1) {
+  color: #303f9f !important;
+  border: 1.5px solid #303f9f !important;
+}
+
+.example-card-footer mat-chip:nth-child(2) {
+  color: #137333 !important;
+  border: 1.5px solid #137333 !important;
+}
+
+.example-card-footer mat-chip:nth-child(3) {
+  color: #b3261e !important;
+  border: 1.5px solid #b3261e !important;
+}
+
+.example-card-footer mat-chip:nth-child(4) {
+  color: #006d77 !important;
+  border: 1.5px solid #006d77 !important;
+}
+
+.example-card-footer mat-chip:nth-child(5) {
+  color: #8a5a00 !important;
+  border: 1.5px solid #8a5a00 !important;
+}
+
+/* CHARTS */
+.container-Charts {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  justify-content: center;
+  margin-top: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chart-line-container {
+  position: relative;
+  width: 40%;
+  height: 360px;
+  min-height: 360px;
+  max-height: 360px;
   padding: 16px;
+  background: #ffffff;
+  border: 1px solid #eef7f8;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(0, 160, 180, 0.07);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-doughnut-container {
+  position: relative;
+  width: 45%;
+  height: 360px;
+  min-height: 360px;
+  max-height: 360px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #eef7f8;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(0, 160, 180, 0.07);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-line-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: block;
+}
+
+.chart-doughnut-container canvas {
+  width: 300px !important;
+  height: 300px !important;
+  max-width: 300px !important;
+  max-height: 300px !important;
+  display: block;
 }
 
 /* TABLAS */
@@ -38,48 +179,43 @@
   margin-top: 32px;
   width: 100%;
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: 32px;
   box-sizing: border-box;
   overflow: hidden;
 }
 
 .table-half {
-  flex: 0 0 calc((100% - 16px) / 2);
-  max-width: calc((100% - 16px) / 2);
+  width: 100%;
+  max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid #eef7f8;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 24px rgba(0, 160, 180, 0.07);
+}
+
+.table-half h3 {
+  margin: 0 0 14px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #12343b;
+}
+
+.table-half table {
+  width: 100%;
+  min-width: 900px;
   overflow: hidden;
-}
-
-.container-Charts {
-  display: flex;
-  gap: 20px;
-  align-items: stretch;
-  margin-top: 20px;
-}
-
-.chart-line-container {
-  width: 65%;
-  min-height: 350px;
-  padding: 16px;
-  background: white;
   border-radius: 12px;
-  box-sizing: border-box;
 }
 
-.chart-doughnut-container {
-  width: 35%;
-  min-height: 350px;
-  padding: 16px;
-  background: white;
-  border-radius: 12px;
-  box-sizing: border-box;
-}
-
-.chart-line-container canvas,
-.chart-doughnut-container canvas {
-  width: 100% !important;
-  height: 100% !important;
+.table-half th {
+  font-weight: 700;
+  color: #12343b;
+  background: #f6fbfc;
 }
 
 .table-half th,
@@ -88,21 +224,29 @@
   white-space: normal;
 }
 
+.empty-table-text {
+  margin-top: 12px;
+  color: #777;
+  text-align: center;
+}
+
 /* RESPONSIVE */
+@media (max-width: 1100px) {
+  .container-Card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 900px) {
-  .container-Table {
+  .container-Charts {
     flex-direction: column;
   }
 
-  .table-half {
-    flex: 0 0 100%;
-    max-width: 100%;
+  .chart-line-container,
+  .chart-doughnut-container {
     width: 100%;
-  }
-
-  .example-card {
-    flex: 0 0 calc((100% - 16px) / 2);
-    max-width: calc((100% - 16px) / 2);
+    max-width: 100%;
+    flex: 0 0 100%;
   }
 }
 
@@ -111,8 +255,81 @@
     padding: 18px;
   }
 
-  .example-card {
-    flex: 0 0 100%;
-    max-width: 100%;
+  .container-Card {
+    grid-template-columns: 1fr;
   }
+
+  .chart-line-container,
+  .chart-doughnut-container {
+    height: 280px;
+    min-height: 280px;
+    max-height: 280px;
+  }
+
+  .chart-doughnut-container canvas {
+    width: 80% !important;
+    height: 80% !important;
+    max-width: 240px !important;
+    max-height: 240px !important;
+  }
+
+  .table-half {
+    padding: 14px;
+  }
+}
+
+/* QUITAR BORDE DEFAULT INTERNO DEL MAT-CHIP */
+:host ::ng-deep .example-card-footer mat-chip {
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border-radius: 999px !important;
+}
+
+:host ::ng-deep .example-card-footer mat-chip .mdc-evolution-chip__action--primary::before {
+  border: 0 !important;
+  border-color: transparent !important;
+}
+
+:host ::ng-deep .example-card-footer mat-chip .mdc-evolution-chip__action {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+:host ::ng-deep .example-card-footer mat-chip .mdc-evolution-chip__cell {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+:host ::ng-deep .example-card-footer mat-chip .mdc-evolution-chip__text-label {
+  color: currentColor !important;
+}
+
+/* Reaplicar bordes personalizados después de limpiar el borde interno */
+:host ::ng-deep .example-card-footer mat-chip:nth-child(1) {
+  color: #303f9f !important;
+  border: 1.5px solid #303f9f !important;
+}
+
+:host ::ng-deep .example-card-footer mat-chip:nth-child(2) {
+  color: #137333 !important;
+  border: 1.5px solid #137333 !important;
+}
+
+:host ::ng-deep .example-card-footer mat-chip:nth-child(3) {
+  color: #b3261e !important;
+  border: 1.5px solid #b3261e !important;
+}
+
+:host ::ng-deep .example-card-footer mat-chip:nth-child(4) {
+  color: #006d77 !important;
+  border: 1.5px solid #006d77 !important;
+}
+
+:host ::ng-deep .example-card-footer mat-chip:nth-child(5) {
+  color: #8a5a00 !important;
+  border: 1.5px solid #8a5a00 !important;
 }

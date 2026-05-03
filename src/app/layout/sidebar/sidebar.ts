@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MATERIAL_IMPORTS } from '../../shared/material-impors';
 import { Auth } from '../../service/auth';
+import { userRole } from '../../shared/enums/enum';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,6 +20,7 @@ export class Sidebar {
   private router = inject(Router);
   //injectamos el servicios
   private authService = inject(Auth);
+  private rol = localStorage.getItem("rol");
 
   cerrar() {
     //Cerramos la sesion
@@ -26,4 +28,9 @@ export class Sidebar {
     //Generamos una núeva ruta
     this.router.navigateByUrl('/login', { replaceUrl: true });
   }
+
+  validarRol(): boolean {
+    return this.rol !== userRole.RECEPCIONISTA;
+  }
+
 }

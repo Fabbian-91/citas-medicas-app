@@ -121,13 +121,14 @@ export class UsuarioController {
             const { id } = req.params;
 
             // Destructuramos el body para traer los datos a actualizar
-            const { email, password, role } = req.body;
+            const { email, password, role, estado} = req.body;
 
             // Esperamos la respuesta del patch del service
             const usuarioActualizado = await UsuarioService.patchUsuario(String(id), {
                 email,
                 password,
-                role: role as userRole
+                role: role as userRole,
+                estado
             });
 
             // Retornamos el usuario actualizado con su estado

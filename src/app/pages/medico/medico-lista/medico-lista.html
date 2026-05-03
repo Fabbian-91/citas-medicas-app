@@ -1,8 +1,12 @@
 <div class="dashboard-card">
-    <button mat-button color="primary" (click)="crearModificarCategoria(null,false)"
+
+    @if (validarRol()) {
+    <button mat-button color="primary" (click)="crearModificarMedico(null,false)"
         [ngStyle]="{'position': 'relative','bottom': '10px'}">
         <mat-icon>add</mat-icon>
-        Crear</button>
+        Crear
+    </button>
+    }
     <mat-form-field>
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
@@ -40,9 +44,10 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                 <td mat-cell *matCellDef="let row">
                     <!-- row le pasa la entidad de categoria completa -->
-                    <button mat-button color="primary" (click)="crearModificarCategoria(row,true)">Editar</button>
-                    <button mat-button color="warn" (click)="eliminarCategoria(row)">Eliminar</button>
-                    <button mat-button color="accent" (click)="crearModificarCategoria(row,false)">Detalle</button>
+                     @if (validarRol()) {<button mat-button color="primary" (click)="crearModificarMedico(row,true)">Editar</button>}
+                     @if (validarRol()) {<button mat-button color="warn" (click)="eliminarMedico(row)">Eliminar</button>}
+                    <button mat-button color="accent" (click)="crearModificarMedico(row,false)">Detalle</button>
+                    
                 </td>
             </ng-container>
 

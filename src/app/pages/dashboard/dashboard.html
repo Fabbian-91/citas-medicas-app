@@ -1,136 +1,185 @@
 <div class="dashboard-card">
+
     <div class="container-Card">
+
         <mat-card class="example-card" appearance="outlined">
             <mat-card-header>
-                <mat-card-title>Chihuahua</mat-card-title>
+                <mat-card-title>Usuarios</mat-card-title>
             </mat-card-header>
 
-            <mat-card-content>
-                <p>{{ longText }}</p>
-            </mat-card-content>
-
             <mat-card-footer class="example-card-footer">
-                <mat-chip-set aria-label="Chihuahua traits">
-                    <mat-chip>charming</mat-chip>
-                    <mat-chip>graceful</mat-chip>
-                    <mat-chip>sassy</mat-chip>
+                <mat-chip-set aria-label="Usuarios">
+                    <mat-chip >Total: {{ resumenDash?.usuarios?.total || 0 }}</mat-chip>
+                    <mat-chip >Activos: {{ resumenDash?.usuarios?.activos || 0 }}</mat-chip>
+                    <mat-chip >Inactivos: {{ resumenDash?.usuarios?.inactivos || 0 }}</mat-chip>
                 </mat-chip-set>
             </mat-card-footer>
         </mat-card>
 
         <mat-card class="example-card" appearance="outlined">
             <mat-card-header>
-                <mat-card-title>Chihuahua</mat-card-title>
+                <mat-card-title>Pacientes</mat-card-title>
             </mat-card-header>
 
-            <mat-card-content>
-                <p>{{ longText }}</p>
-            </mat-card-content>
-
             <mat-card-footer class="example-card-footer">
-                <mat-chip-set aria-label="Chihuahua traits">
-                    <mat-chip>charming</mat-chip>
-                    <mat-chip>graceful</mat-chip>
-                    <mat-chip>sassy</mat-chip>
+                <mat-chip-set aria-label="Pacientes">
+                    <mat-chip>Total: {{ resumenDash?.pacientes?.total || 0 }}</mat-chip>
+                    <mat-chip>Activos: {{ resumenDash?.pacientes?.activos || 0 }}</mat-chip>
+                    <mat-chip>Inactivos: {{ resumenDash?.pacientes?.inactivos || 0 }}</mat-chip>
                 </mat-chip-set>
             </mat-card-footer>
         </mat-card>
 
         <mat-card class="example-card" appearance="outlined">
             <mat-card-header>
-                <mat-card-title>Chihuahua</mat-card-title>
+                <mat-card-title>Médicos</mat-card-title>
             </mat-card-header>
 
-            <mat-card-content>
-                <p>{{ longText }}</p>
-            </mat-card-content>
-
             <mat-card-footer class="example-card-footer">
-                <mat-chip-set aria-label="Chihuahua traits">
-                    <mat-chip>charming</mat-chip>
-                    <mat-chip>graceful</mat-chip>
-                    <mat-chip>sassy</mat-chip>
+                <mat-chip-set aria-label="Medicos">
+                    <mat-chip>Total: {{ resumenDash?.medicos?.total || 0 }}</mat-chip>
+                    <mat-chip>Activos: {{ resumenDash?.medicos?.activos || 0 }}</mat-chip>
+                    <mat-chip>Inactivos: {{ resumenDash?.medicos?.inactivos || 0 }}</mat-chip>
                 </mat-chip-set>
             </mat-card-footer>
         </mat-card>
 
         <mat-card class="example-card" appearance="outlined">
             <mat-card-header>
-                <mat-card-title>Chihuahua</mat-card-title>
+                <mat-card-title>Citas</mat-card-title>
             </mat-card-header>
 
-            <mat-card-content>
-                <p>{{ longText }}</p>
-            </mat-card-content>
-
             <mat-card-footer class="example-card-footer">
-                <mat-chip-set aria-label="Chihuahua traits">
-                    <mat-chip>charming</mat-chip>
-                    <mat-chip>graceful</mat-chip>
-                    <mat-chip>sassy</mat-chip>
+                <mat-chip-set aria-label="Citas">
+                    <mat-chip>Total: {{ resumenDash?.citas?.total || 0 }}</mat-chip>
+                    <mat-chip>Activas: {{ resumenDash?.citas?.activas || 0 }}</mat-chip>
+                    <mat-chip>Inactivas: {{ resumenDash?.citas?.inactivas || 0 }}</mat-chip>
                 </mat-chip-set>
             </mat-card-footer>
         </mat-card>
+
     </div>
 
     <div class="container-Charts">
-  <div class="chart-line-container">
-    <canvas id="chart"></canvas>
-  </div>
+        <div class="chart-line-container">
+            <canvas id="chart"></canvas>
+        </div>
 
-  <div class="chart-doughnut-container">
-    <canvas id="chartEstado"></canvas>
-  </div>
-</div>
+        <div class="chart-doughnut-container">
+            <canvas id="chartEstado"></canvas>
+        </div>
+    </div>
 
     <div class="container-Table">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-half">
-            <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef>No.</th>
-                <td mat-cell *matCellDef="let element">{{ element.position }}</td>
-            </ng-container>
 
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>Name</th>
-                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-            </ng-container>
+        <div class="table-half">
+            <h3>Próximas citas</h3>
 
-            <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef>Weight</th>
-                <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
-            </ng-container>
+            <table mat-table [dataSource]="proximasCitas" class="mat-elevation-z8">
 
-            <ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef>Symbol</th>
-                <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
-            </ng-container>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>ID</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-half">
-            <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef>No.</th>
-                <td mat-cell *matCellDef="let element">{{ element.position }}</td>
-            </ng-container>
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                    <td mat-cell *matCellDef="let element">{{ element.fecha }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>Name</th>
-                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-            </ng-container>
+                <ng-container matColumnDef="hora">
+                    <th mat-header-cell *matHeaderCellDef>Hora</th>
+                    <td mat-cell *matCellDef="let element">{{ formatearHora(element.hora) }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef>Weight</th>
-                <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
-            </ng-container>
+                <ng-container matColumnDef="paciente">
+                    <th mat-header-cell *matHeaderCellDef>Paciente</th>
+                    <td mat-cell *matCellDef="let element">{{ element.paciente?.nombre }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef>Symbol</th>
-                <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
-            </ng-container>
+                <ng-container matColumnDef="cedula">
+                    <th mat-header-cell *matHeaderCellDef>Cédula</th>
+                    <td mat-cell *matCellDef="let element">{{ element.paciente?.cedula }}</td>
+                </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
+                <ng-container matColumnDef="telefono">
+                    <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+                    <td mat-cell *matCellDef="let element">{{ element.paciente?.telefono }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="medico">
+                    <th mat-header-cell *matHeaderCellDef>Médico</th>
+                    <td mat-cell *matCellDef="let element">{{ element.medico?.nombre }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="especialidad">
+                    <th mat-header-cell *matHeaderCellDef>Especialidad</th>
+                    <td mat-cell *matCellDef="let element">{{ element.medico?.especialidad }}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsProximas"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsProximas"></tr>
+            </table>
+
+            @if (proximasCitas.data.length === 0) {
+            <p class="empty-table-text">No hay próximas citas.</p>
+            }
+        </div>
+
+        <div class="table-half">
+            <h3>Últimas citas pasadas</h3>
+
+            <table mat-table [dataSource]="ultimasCitasPasadas" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>ID</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                    <td mat-cell *matCellDef="let element">{{ element.fecha }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="hora">
+                    <th mat-header-cell *matHeaderCellDef>Hora</th>
+                    <td mat-cell *matCellDef="let element">{{ formatearHora(element.hora) }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="paciente">
+                    <th mat-header-cell *matHeaderCellDef>Paciente</th>
+                    <td mat-cell *matCellDef="let element">{{ element.paciente?.nombre }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="cedula">
+                    <th mat-header-cell *matHeaderCellDef>Cédula</th>
+                    <td mat-cell *matCellDef="let element">{{ element.paciente?.cedula }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="telefono">
+                    <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+                    <td mat-cell *matCellDef="let element">{{ element.paciente?.telefono }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="medico">
+                    <th mat-header-cell *matHeaderCellDef>Médico</th>
+                    <td mat-cell *matCellDef="let element">{{ element.medico?.nombre }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="especialidad">
+                    <th mat-header-cell *matHeaderCellDef>Especialidad</th>
+                    <td mat-cell *matCellDef="let element">{{ element.medico?.especialidad }}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsPasadas"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsPasadas"></tr>
+            </table>
+
+            @if (ultimasCitasPasadas.data.length === 0) {
+            <p class="empty-table-text">No hay citas pasadas.</p>
+            }
+        </div>
+
     </div>
+
 </div>

@@ -19,6 +19,9 @@ export class CitaService {
             relations: {
                 paciente: true,
                 medico: true
+            },
+            where:{
+                estado:true
             }
         });
 

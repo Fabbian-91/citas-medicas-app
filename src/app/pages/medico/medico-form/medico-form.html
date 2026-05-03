@@ -1,6 +1,6 @@
 <h2 mat-dialog-title class="dialog-title">
-    <mat-icon>person</mat-icon>
-    <span>Paciente</span>
+    <mat-icon>medical_services</mat-icon>
+    <span>Médico</span>
 </h2>
 
 <mat-dialog-content class="dialog-content">
@@ -22,20 +22,11 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Cédula</mat-label>
-            <input matInput formControlName="cedula" />
+            <mat-label>Especialidad</mat-label>
+            <input matInput formControlName="especialidad" />
 
-            @if (form.get('cedula')?.hasError('required')) {
-            <mat-error>La cédula es obligatoria</mat-error>
-            }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Teléfono</mat-label>
-            <input matInput formControlName="telefono" />
-
-            @if (form.get('telefono')?.hasError('required')) {
-            <mat-error>El teléfono es obligatorio</mat-error>
+            @if (form.get('especialidad')?.hasError('required')) {
+            <mat-error>La especialidad es obligatoria</mat-error>
             }
         </mat-form-field>
 
@@ -56,7 +47,7 @@
                 Cancelar
             </button>
 
-            @if (!data.paciente || data.isModificar) {
+            @if (!data.medico || data.isModificar) {
             <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
                 <mat-icon>{{ data.isModificar ? 'save' : 'add' }}</mat-icon>
                 {{ data.isModificar ? 'Guardar' : 'Crear' }}

@@ -3,53 +3,48 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { MATERIAL_IMPORTS } from '../../../shared/material-impors';
-import { PacienteModel } from '../../../models/paciente.model';
+import { MedicoModel } from '../../../models/medico.model';
 
 @Component({
-  selector: 'app-paciente-form',
+  selector: 'app-medico-form',
   standalone: true,
   imports: [
     ...MATERIAL_IMPORTS,
     ReactiveFormsModule
   ],
-  templateUrl: './paciente-form.html',
-  styleUrl: './paciente-form.scss',
+  templateUrl: './medico-form.html',
+  styleUrl: './medico-form.scss',
 })
-export class PacienteForm {
+export class MedicoForm {
   private fb = inject(FormBuilder);
-  private dialogRef = inject(MatDialogRef<PacienteForm>);
+  private dialogRef = inject(MatDialogRef<MedicoForm>);
 
   data = inject(MAT_DIALOG_DATA) as {
-    paciente: PacienteModel | null;
+    medico: MedicoModel | null;
     isModificar: boolean;
   };
 
   form = this.fb.group({
-    id: [{ value: this.data.paciente?.id || '', disabled: true }],
+    id: [{ value: this.data.medico?.id || '', disabled: true }],
 
     nombre: [
-      this.data.paciente?.nombre || '',
+      this.data.medico?.nombre || '',
       this.data.isModificar ? [] : [Validators.required],
     ],
 
-    cedula: [
-      this.data.paciente?.cedula || '',
-      this.data.isModificar ? [] : [Validators.required],
-    ],
-
-    telefono: [
-      this.data.paciente?.telefono || '',
+    especialidad: [
+      this.data.medico?.especialidad || '',
       this.data.isModificar ? [] : [Validators.required],
     ],
 
     estado: [
-      this.data.paciente?.estado ?? true,
+      this.data.medico?.estado ?? true,
       this.data.isModificar ? [] : [Validators.required],
     ],
   });
 
   constructor() {
-    if (!this.data.isModificar && this.data.paciente) {
+    if (!this.data.isModificar && this.data.medico) {
       this.form.disable();
     }
   }
@@ -65,8 +60,7 @@ export class PacienteForm {
     if (!this.data.isModificar) {
       const payload = {
         nombre: raw.nombre,
-        cedula: raw.cedula,
-        telefono: raw.telefono,
+        especialidad: raw.especialidad,
       };
 
       this.dialogRef.close(payload);
@@ -79,12 +73,8 @@ export class PacienteForm {
       payload.nombre = raw.nombre;
     }
 
-    if (raw.cedula && raw.cedula.trim() !== '') {
-      payload.cedula = raw.cedula;
-    }
-
-    if (raw.telefono && raw.telefono.trim() !== '') {
-      payload.telefono = raw.telefono;
+    if (raw.especialidad && raw.especialidad.trim() !== '') {
+      payload.especialidad = raw.especialidad;
     }
 
     if (raw.estado !== null && raw.estado !== undefined) {

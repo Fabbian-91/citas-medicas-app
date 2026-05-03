@@ -17,7 +17,7 @@ export class UsuarioService {
         const repo = AppDataSource.getRepository(Usuario);
 
         //Listamos todos los usarios que tengan un estado activo
-        const usuarios = await repo.find({ where: { estado: true } })
+        const usuarios = await repo.find({where:{estado:true}})
 
         //Devolvemos una lista con los datos mapeados
         return UsuarioMapper.toResponseDtoList(usuarios);
@@ -135,7 +135,7 @@ export class UsuarioService {
 
     static patchUsuario = async (
         id: string,
-        usuario: { email?: string; password?: string; role?: userRole }
+        usuario: { email?: string; password?: string; role?: userRole, estado: boolean }
     ) => {
         // Validamos que el id no venga vacío
         if (!id || id.trim() === "") {
@@ -184,6 +184,13 @@ export class UsuarioService {
             }
         }
 
+        // Validamos que el estado sea booleano solo si viene en el body
+        if (usuario.estado !== undefined) {
+            if (typeof usuario.estado !== "boolean") {
+                throw new AppError("El estado debe ser verdadero o falso", 400);
+            }
+        }
+
         // Traemos el repo que interactúa con la tabla usuario
         const repo = AppDataSource.getRepository(Usuario);
 
@@ -224,6 +231,11 @@ export class UsuarioService {
         // Actualizamos el role solo si viene en el body
         if (usuario.role !== undefined) {
             usuarioExiste.role = usuario.role;
+        }
+
+        // Actualizamos el estado solo si viene en el body
+        if (usuario.estado !== undefined) {
+            usuarioExiste.estado = usuario.estado;
         }
 
         // Guardamos el usuario actualizado

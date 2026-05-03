@@ -12,7 +12,7 @@ export class MedicoService {
         // Traemos el repositorio para interactuar con la tabla medico
         const repo = AppDataSource.getRepository(Medico);
         // Listamos todos los medicos que tengan un estado activo
-        const medicos = await repo.findBy({ estado: true });
+        const medicos = await repo.find({where:{estado:true}});
         // Retornamos la lista de medicos mapeada a su responseDto
         return MedicoMapper.toResponseDtoList(medicos);
     }

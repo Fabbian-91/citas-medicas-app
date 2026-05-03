@@ -21,20 +21,26 @@
       <span>Pacientes</span>
     </a>
 
+
     <a class="menu-item" routerLink="/medicos" routerLinkActive="active">
       <mat-icon>medical_services</mat-icon>
       <span>Médicos</span>
     </a>
+
+
 
     <a class="menu-item" routerLink="/citas" routerLinkActive="active">
       <mat-icon>calendar_month</mat-icon>
       <span>Citas</span>
     </a>
 
+    @if (validarRol()) {
     <a class="menu-item" routerLink="/usuarios" routerLinkActive="active">
       <mat-icon>manage_accounts</mat-icon>
       <span>Usuarios</span>
     </a>
+    }
+
   </nav>
 
   <div class="sidebar-footer">

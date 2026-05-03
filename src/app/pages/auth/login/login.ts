@@ -87,7 +87,8 @@ export class Login {
         console.error('Mensaje:', error.error?.message);
         console.error('Errores:', JSON.stringify(error.error?.errors, null, 2));
       }
-
     });
   }
 }
+
+

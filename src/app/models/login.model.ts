@@ -1,8 +1,14 @@
+/**
+ * Modelo para enviar la autentificación
+ */
 export interface LoginModel {
-    userName: string,
+    email: string,
     password: string
 }
 
+/**
+ * Modelo para enviar la respuesta de la autentificación
+ */
 export interface LoginResponse {
     message: string;
     token: string;

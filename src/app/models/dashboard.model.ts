@@ -1,8 +1,14 @@
+/**
+ * Modelo para recibir el resumen de todo el dashboard
+ */
 export interface DashboardResponse {
     message: string;
     data: DashboardData;
 }
 
+/**
+ * modelod para recibir los arreglos y el resumen de dashboard
+ */
 export interface DashboardData {
     resumen: ResumenDashboard;
     proximasCitas: CitaDashboard[];
@@ -11,6 +17,9 @@ export interface DashboardData {
     citasPorEstado: CitasPorEstado[];
 }
 
+/**
+ * Modelo para recibir el resumen principal los cards
+ */
 export interface ResumenDashboard {
     pacientes: ResumenEstado;
     usuarios: ResumenEstado;
@@ -18,12 +27,18 @@ export interface ResumenDashboard {
     citas: ResumenCitas;
 }
 
+/**
+ * Modelo para recimir el resumen por estado y hacer la grafica de estados
+ */
 export interface ResumenEstado {
     total: number;
     activos: number;
     inactivos: number;
 }
 
+/**
+ * Modelo para recibir resumen de citas
+ */
 export interface ResumenCitas {
     total: number;
     activas: number;
@@ -32,6 +47,9 @@ export interface ResumenCitas {
     pasadas: number;
 }
 
+/**
+ * Modelo para recibir la citas
+ */
 export interface CitaDashboard {
     id: number;
     paciente: PacienteDashboard;
@@ -40,6 +58,9 @@ export interface CitaDashboard {
     hora: string;
 }
 
+/**
+ * Modelo para recibir todos lo pacientes
+ */
 export interface PacienteDashboard {
     id: number;
     nombre: string;
@@ -48,6 +69,9 @@ export interface PacienteDashboard {
     estado: boolean;
 }
 
+/**
+ * Modelo para recibir todo los medicos
+ */
 export interface MedicoDashboard {
     id: number;
     nombre: string;
@@ -55,11 +79,17 @@ export interface MedicoDashboard {
     estado: boolean;
 }
 
+/**
+ * Modelo para recibir todo las citas por dia
+ */
 export interface CitasPorDia {
     dia: string;
     cantidad: number;
 }
 
+/**
+ * Modelo para recibir todo la citas por estado
+ */
 export interface CitasPorEstado {
     activo: boolean;
     cantidad: number;

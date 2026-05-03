@@ -403,7 +403,9 @@ export class PacienteService {
             throw new AppError("El paciente no existe", 404);
         }
 
+        pacienteExistente.estado = false;
+
         // Eliminamos el paciente de la base de datos
-        await repo.remove(pacienteExistente);
+        await repo.save(pacienteExistente);
     };
 }

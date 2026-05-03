@@ -82,11 +82,10 @@ export class DashboardService {
         // Obtener las próximas citas activas
         const proximasCitas = await repoCita.find({
             where: {
-                fecha: MoreThanOrEqual(hoy),
                 estado: true
             },
             order: { fecha: "ASC" },
-            take: 20,
+            take: 5,
             skip: 0,
             relations: ["paciente", "medico"]
         });
@@ -94,11 +93,10 @@ export class DashboardService {
         // Obtener las primeras 20 citas 
         const citasPasadas = await repoCita.find({
             where: {
-                fecha: LessThan(hoy),
                 estado: false
             },
             order: { fecha: "ASC" },
-            take: 20,
+            take: 5,
             skip: 0,
             relations: ["paciente", "medico"]
         });

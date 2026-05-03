@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class Dashboard {
+export class DashboardSer {
   //injetion de dependecias del HttpClient
   private http = inject(HttpClient);
 

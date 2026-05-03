@@ -1,3 +1,6 @@
+/**
+ * Modelo para enviar citas
+ * */
 export interface CitaModel{
     id?:number;
     fecha:string;
@@ -17,7 +20,9 @@ export interface CitaModel{
         especialidad:string;
     }
 }
-
+/**
+ * Modelo para recibir la lista de citas
+ */
 export interface citaApiReponse{
     message:string;
     data:CitaModel[];
