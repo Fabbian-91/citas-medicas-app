@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-
 # Compiled output
 dist/
 tmp/
@@ -17,6 +14,7 @@ build/
 
 # Node modules - frontend y backend
 node_modules/
+citas-medicas-app-backend/node_modules/
 
 # Logs
 logs/
@@ -25,25 +23,26 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
-# Backend build/output
-citas-medicas-app-backend/dist/
-citas-medicas-app-backend/build/
 citas-medicas-app-backend/logs/
 
 # Environment variables
 .env
-.env.local
-.env.development
-.env.production
-.env.test
+.env.*
+!.env.example
 
 # Backend environment variables
 citas-medicas-app-backend/.env
-citas-medicas-app-backend/.env.local
-citas-medicas-app-backend/.env.development
-citas-medicas-app-backend/.env.production
-citas-medicas-app-backend/.env.test
+citas-medicas-app-backend/.env.*
+!citas-medicas-app-backend/.env.example
+
+# Archivo conexión BD / Data source
+API/src/config/data-source.ts
+citas-medicas-app-backend/src/config/data-source.ts
+src/config/data-source.ts
+
+# Backend build/output
+citas-medicas-app-backend/dist/
+citas-medicas-app-backend/build/
 
 # Coverage
 coverage/
