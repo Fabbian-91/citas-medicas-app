@@ -20,11 +20,14 @@ import {
   styleUrl: './dashboard.scss',
 })
 export class Dashboard implements OnInit {
+  //inject de Chart para poder usar la libreria de grafica
   public chart!: Chart;
   public chartEstado!: Chart;
 
+  //inject de servicio de dasboard
   private dashboard = inject(DashboardSer);
 
+  //Datos para recibir el json de el dashboard
   data!: DashboardData;
   resumenDash!: ResumenDashboard;
 
@@ -34,6 +37,7 @@ export class Dashboard implements OnInit {
   citasPorDia: CitasPorDia[] = [];
   citasPorEstado: CitasPorEstado[] = [];
 
+  //Tabla de las proximas citas
   displayedColumnsProximas: string[] = [
     'id',
     'fecha',
@@ -45,6 +49,7 @@ export class Dashboard implements OnInit {
     'especialidad'
   ];
 
+  //Tablas de la citas pasadas
   displayedColumnsPasadas: string[] = [
     'id',
     'fecha',
@@ -56,13 +61,20 @@ export class Dashboard implements OnInit {
     'especialidad'
   ];
 
+  /**
+   * cargar el dashboard apenas el componente se inicialice
+   */
   ngOnInit(): void {
     this.loadDashboard();
   }
 
+  /**
+   * Metodo para cargar el dashboard
+   */
   loadDashboard(): void {
     this.dashboard.getDashboardData().subscribe({
       next: (res) => {
+        //Traemos los datos
         this.data = res.data;
         this.resumenDash = res.data.resumen;
 
@@ -76,6 +88,7 @@ export class Dashboard implements OnInit {
         console.log('Próximas citas:', this.proximasCitas.data);
         console.log('Últimas citas pasadas:', this.ultimasCitasPasadas.data);
 
+        //cargamos los graficos
         this.cargarGraficoCitasPorDia();
         this.cargarGraficoCitasPorEstado();
       },
@@ -85,18 +98,27 @@ export class Dashboard implements OnInit {
     });
   }
 
+  /**
+   *Metodo para cargar la grafica por dia
+   */
   cargarGraficoCitasPorDia(): void {
+    //destruimos la grafica cada ves que se inialice el componente para que vuelva a cargar con los datos
     if (this.chart) {
       this.chart.destroy();
     }
 
+    //Generamos su ingancia
     this.chart = new Chart('chart', {
+      //Indicamos tipo de grafico
       type: 'line' as ChartType,
       data: {
-        labels: this.citasPorDia.map(item => this.traducirDia(item.dia)),
+        //Cargamos sus días
+        labels: this.citasPorDia.map(item =>item.dia),
         datasets: [
           {
+            //Cargamos sus datos
             label: 'Citas por día',
+            //Cargamos la cantidad de días
             data: this.citasPorDia.map(item => item.cantidad),
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
@@ -112,21 +134,29 @@ export class Dashboard implements OnInit {
     });
   }
 
+/**
+ * Metodo para cargar el grafico de pastel
+ */
   cargarGraficoCitasPorEstado(): void {
+    //creamos uno núevo cada ves que se incialice el componente
     if (this.chartEstado) {
       this.chartEstado.destroy();
     }
 
+    //cargamos los datos de la grafica
     const activas = this.citasPorEstado.find(item => item.activo === true)?.cantidad ?? 0;
     const inactivas = this.citasPorEstado.find(item => item.activo === false)?.cantidad ?? 0;
 
+    //intaciamos la núeva grafica
     this.chartEstado = new Chart('chartEstado', {
       type: 'doughnut' as ChartType,
       data: {
+        //colocamos su labels
         labels: ['Activas', 'Inactivas'],
         datasets: [
           {
             label: 'Citas por estado',
+            //cargamos la cantidad de activas y inactivas
             data: [activas, inactivas],
             backgroundColor: [
               'rgb(45, 182, 216)',
@@ -143,21 +173,12 @@ export class Dashboard implements OnInit {
       },
     });
   }
-
-  traducirDia(dia: string): string {
-    const dias: Record<string, string> = {
-      Monday: 'Lunes',
-      Tuesday: 'Martes',
-      Wednesday: 'Miércoles',
-      Thursday: 'Jueves',
-      Friday: 'Viernes',
-      Saturday: 'Sábado',
-      Sunday: 'Domingo',
-    };
-
-    return dias[dia] || dia;
-  }
-
+  
+  /**
+   * Metodo para formatear la hora
+   * @param hora 
+   * @returns 
+   */
   formatearHora(hora: string): string {
     return hora ? hora.substring(0, 5) : '';
   }

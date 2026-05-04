@@ -29,6 +29,10 @@ export class Sidebar {
     this.router.navigateByUrl('/login', { replaceUrl: true });
   }
 
+  /**
+   * Metodo para validar rol y usar en directivas 
+   * @returns 
+   */
   validarRol(): boolean {
     return this.rol !== userRole.RECEPCIONISTA;
   }

@@ -15,7 +15,7 @@
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="nombre" />
-
+            <!-- Directiva para validar el campo del nombre -->
             @if (form.get('nombre')?.hasError('required')) {
             <mat-error>El nombre es obligatorio</mat-error>
             }
@@ -24,7 +24,7 @@
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Cédula</mat-label>
             <input matInput formControlName="cedula" />
-
+            <!-- Directiva para validar el campo de cedula -->
             @if (form.get('cedula')?.hasError('required')) {
             <mat-error>La cédula es obligatoria</mat-error>
             }
@@ -33,12 +33,13 @@
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Teléfono</mat-label>
             <input matInput formControlName="telefono" />
-
+            <!-- Directiva para validar el campo del telefono -->
             @if (form.get('telefono')?.hasError('required')) {
             <mat-error>El teléfono es obligatorio</mat-error>
             }
         </mat-form-field>
 
+        <!-- Directiva para mostrar la opcioenes de estado en el formulario -->
         @if (data.isModificar) {
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Estado</mat-label>
@@ -55,7 +56,7 @@
                 <mat-icon>close</mat-icon>
                 Cancelar
             </button>
-
+            <!-- Directiva para colocar los campos de modificar -->
             @if (!data.paciente || data.isModificar) {
             <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
                 <mat-icon>{{ data.isModificar ? 'save' : 'add' }}</mat-icon>

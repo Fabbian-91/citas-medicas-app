@@ -27,24 +27,44 @@ export class Cita {
     return this.http.get<citaApiReponse>(this.URL, { headers });
   }
 
+  /**
+   * Metodo para enviar peticion de consultar una cita por su id
+   * @param id 
+   * @returns 
+   */
   getCitaById(id: number): Observable<citaApiReponse> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders(token);
     return this.http.get<citaApiReponse>(`${this.URL}/${id}`, { headers });
   }
 
+  /**
+   * Metodo para enviar la petición de crear una cita
+   * @param c 
+   * @returns 
+   */
   postCita(c:Cita): Observable<citaApiReponse> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders(token);
     return this.http.post<citaApiReponse>(this.URL, c, { headers });
   }
 
+  /**
+   * Metodo para enviar la petición de actualizar una cita
+   * @param id 
+   * @param c 
+   * @returns 
+   */
   patchCita(id: number, c: Cita): Observable<citaApiReponse> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders(token);
     return this.http.patch<citaApiReponse>(`${this.URL}/${id}`, c, { headers });
   }
-
+  /**
+   * Metodo para enviar la petición de elimiar una cita
+   * @param id 
+   * @returns 
+   */
   deleteCita(id: number): Observable<citaApiReponse> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders(token);

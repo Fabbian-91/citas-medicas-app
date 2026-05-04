@@ -58,6 +58,7 @@ export class CitaLista {
     //accedemos al servicio y nos sucribimos
     this.CitaService.getCita().subscribe({
       next: (resp) => {
+        //Cargamos todas las citas
         this.dataSource.data = resp.data;
         console.log("Categorias Guardadas", resp.data)
       },
@@ -83,6 +84,7 @@ export class CitaLista {
  * @param isMod 
  */
   crearModificarCita(cita: CitaModel | null, isMod: boolean): void {
+    //atributos del modal
     this.dialogRef = this.dialog.open(CitaForm, {
       width: '600px',
       height: isMod ? '600px' : '700px',
@@ -92,13 +94,13 @@ export class CitaLista {
       },
     });
 
+    //evento after close y tomamos los datos del formulario
     this.dialogRef.afterClosed().subscribe((result) => {
       if (!result) {
         return;
       }
 
-      console.log('Resultado recibido del modal:', result);
-
+      //Validar si se va actualizar o se va crear
       if (isMod && cita?.id) {
         this.CitaService.patchCita(cita.id, result).subscribe({
           next: (resp) => {
@@ -151,6 +153,10 @@ export class CitaLista {
     }
   }
 
+  /**
+   * Metodo para validar el rol y usar en directivas
+   * @returns 
+   */
   validarRol(): boolean {
     return this.rol !== userRole.RECEPCIONISTA;
   }

@@ -168,6 +168,10 @@ export class UsuarioLista implements OnInit, AfterViewInit {
       });
     }
   }
+  /**
+   * Metodo par validar el rol y usarlo en directiva
+   * @returns 
+   */
   validarRol(): boolean {
     return this.rol !== userRole.RECEPCIONISTA;
   }

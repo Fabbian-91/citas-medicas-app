@@ -1,7 +1,11 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guard/auth-guard-guard';
 
+/**
+ * Rutar para la navegación del sistema
+ */
 export const routes: Routes = [
+  //Rutas por defecto de logins
   {
     path: '',
     redirectTo: 'usuarios',
@@ -13,12 +17,13 @@ export const routes: Routes = [
       import('./pages/auth/login/login').then(m => m.Login)
   },
 
-  // Rutas protegidas dentro del layout
+  // Rutas protegidas dentro por el authGuard
   {
     path: '',
     loadComponent: () =>
       import('./layout/layout/layout').then(m => m.Layout),
     canActivate: [authGuard],
+    //Rutas hijas del guard
     children: [
       {
         path: 'dashboard',

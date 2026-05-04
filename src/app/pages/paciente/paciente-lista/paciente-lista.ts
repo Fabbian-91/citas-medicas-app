@@ -155,6 +155,10 @@ export class PacienteLista {
     }
   }
 
+  /**
+   * Metodo para valiar el rol y usarlo en directivas
+   * @returns 
+   */
   validarRol(): boolean {
     return this.rol !== userRole.RECEPCIONISTA;
   }

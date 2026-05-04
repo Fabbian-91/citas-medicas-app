@@ -17,17 +17,24 @@ import { userRole } from '../../../shared/enums/enum';
   styleUrl: './medico-lista.scss',
 })
 export class MedicoLista {
+  //Arreglo para listar todos los medicos
   medicos: MedicoModel[] = [];
+  //columnas de la tabla
   displayedColumns: string[] = ['id', 'nombre', 'especialidad', 'estado', 'action'];
+  //Datos de la tabla
   dataSource = new MatTableDataSource<MedicoModel>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   //Inject de dialog para modal
   private dialog = inject(MatDialog);
+  //Creamos el dialogo de referencia
   dialogRef!: MatDialogRef<MedicoForm>;
+  //Traemos el servicio de medico
   private medicoService = inject(Medico);
+  //Cargamos el servicio para las notificaciones
   private toastr = inject(ToastrService);
+  //Cargamos el rol del local storage para las directivas
   private rol=localStorage.getItem("rol");
 
 
@@ -36,12 +43,18 @@ export class MedicoLista {
     this.dataSource.sort = this.sort;
   }
 
+  /**
+   * Metodo para cargar la tabla de usuarios al inicializar el componente
+   */
   ngOnInit(): void {
     this.loadUsuario();
   }
 
+  /**
+   * Meetodo para cargar la tabla de usuarios
+   */
   loadUsuario(): void {
-    this.medicoService.getPaciente().subscribe({
+    this.medicoService.getMedico().subscribe({
       next: (resp) => {
         this.dataSource.data = resp.data;
         console.log("Categorias Guardadas", resp.data)
@@ -98,7 +111,7 @@ export class MedicoLista {
       //Condición para crear un núevo usuario
       if (isMod && medico?.id) {
         //Llamamos al patch de usarios par modificar
-        this.medicoService.patchPaciente(medico.id, result).subscribe({
+        this.medicoService.patchMedico(medico.id, result).subscribe({
           //Esperamos respuestas
           next: (resp) => {
             this.toastr.success(resp.message);
@@ -110,7 +123,7 @@ export class MedicoLista {
         });
       } else {
         //Llamamos al servicio de agregar
-        this.medicoService.postPaciente(result).subscribe({
+        this.medicoService.postMedico(result).subscribe({
           //Esperamos respuesta
           next: (resp) => {
             this.toastr.success(resp.message);
@@ -139,7 +152,7 @@ export class MedicoLista {
     //Validamos la respuesta del usuario para eliminar 
     if (confirm(`¿Estás seguro de eliminar el medico "${medico.nombre}-${medico.especialidad}"?`)) {
       //Llamamos al servicio de elminar
-      this.medicoService.deletePaciente(medico.id).subscribe({
+      this.medicoService.deleteMedico(medico.id).subscribe({
         //Esperamos respuesta
         next: (resp) => {
           this.toastr.success(resp.message);
@@ -152,6 +165,10 @@ export class MedicoLista {
     }
   }
 
+  /**
+   * Metodo para valiar el rol y usar su valor en las directivas
+   * @returns 
+   */
   validarRol():boolean{
     return this.rol!==userRole.RECEPCIONISTA;
   }

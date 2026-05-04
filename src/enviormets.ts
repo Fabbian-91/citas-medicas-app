@@ -1,3 +1,6 @@
+/**
+ * envioments de rutas predefinidas de peticiones de la api
+ */
 export const enviorment = {
     production: false,
     apiUrl: 'http://localhost:3000/',
