@@ -20,8 +20,8 @@ export class CitaService {
                 paciente: true,
                 medico: true
             },
-            where:{
-                estado:true
+            where: {
+                estado: true
             }
         });
 
@@ -178,8 +178,8 @@ export class CitaService {
         const [horaNumero, minutosNumero] = hora.split(":").map(Number);
         if (
             horaNumero < 6 ||
-            (horaNumero === 6 && minutosNumero > 0)
-        ) {
+            horaNumero > 17 ||
+            (horaNumero === 17 && minutosNumero > 0)) {
             throw new AppError("Solo se pueden agendar citas despues las 6:00 AM", 400);
         }
 
@@ -334,10 +334,9 @@ export class CitaService {
 
             // Validamos que no se pueda agendar antes de las 6:00 AM ni después de las 5:00 PM
             const [horaNumero, minutosNumero] = citaData.hora.split(":").map(Number);
-            if (
-                horaNumero < 6 ||
-                (horaNumero === 6 && minutosNumero > 0)
-            ) {
+            if (horaNumero < 6 ||
+                horaNumero > 17 ||
+                (horaNumero === 17 && minutosNumero > 0)) {
                 throw new AppError("Solo se pueden agendar citas despues las 6:00 AM", 400);
             }
         }
