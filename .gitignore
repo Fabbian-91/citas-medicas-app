@@ -37,6 +37,11 @@ citas-medicas-app-backend/.env
 citas-medicas-app-backend/.env.*
 !citas-medicas-app-backend/.env.example
 
+# Archivo conexión BD / Data Source
+citas-medicas-app-backend/src/config/data-source.ts
+src/config/data-source.ts
+API/src/config/data-source.ts
+
 # Backend build/output
 citas-medicas-app-backend/dist/
 citas-medicas-app-backend/build/
