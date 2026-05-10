@@ -18,8 +18,6 @@
 
 El sistema permite registrar pacientes, administrar médicos, crear citas y validar que no existan citas duplicadas en el mismo horario. Además, implementa autenticación mediante **JWT**, control de acceso por **roles**, validaciones de datos y una arquitectura separada entre frontend, backend y base de datos.
 
-Este proyecto corresponde al **Caso 3: Sistema de Citas Médicas**.
-
 ---
 
 ## 🎯 Objetivo del sistema
