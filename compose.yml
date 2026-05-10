@@ -1,0 +1,44 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: citas_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - '3307:3306'
+    volumes:
+      - citas_mysql_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: ./citas-medicas-app-backend
+      dockerfile: Dockerfile
+    container_name: citas_backend
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      PORT: 3000
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USERNAME: fabian
+      DB_PASSWORD: 1234
+      DB_DATABASE: sistema_citas_medicas
+    depends_on:
+      - mysql
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: citas_frontend
+    restart: always
+    ports:
+      - '4200:4200'
+    depends_on:
+      - backend
+volumes:
+  citas_mysql_data:

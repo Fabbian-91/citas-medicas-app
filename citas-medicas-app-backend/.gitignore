@@ -6,19 +6,10 @@ node_modules/
 .env.*
 !.env.example
 
-# Archivo conexión BD
-API/src/config/data-source.ts
-citas-medicas-app-backend/src/config/data-source.ts
-
-# Build TypeScript / Angular / Nx
+# Build TypeScript
 dist/
 build/
 tmp/
-out-tsc/
-bazel-out/
-.angular/cache/
-.nx/cache/
-.nx/workspace-data/
 
 # Logs
 logs/

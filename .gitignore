@@ -6,9 +6,11 @@ bazel-out/
 build/
 
 # Angular
+.angular/
 .angular/cache/
 
 # Nx
+.nx/
 .nx/cache/
 .nx/workspace-data/
 
@@ -35,11 +37,6 @@ citas-medicas-app-backend/.env
 citas-medicas-app-backend/.env.*
 !citas-medicas-app-backend/.env.example
 
-# Archivo conexión BD / Data source
-API/src/config/data-source.ts
-citas-medicas-app-backend/src/config/data-source.ts
-src/config/data-source.ts
-
 # Backend build/output
 citas-medicas-app-backend/dist/
 citas-medicas-app-backend/build/
@@ -56,6 +53,7 @@ citas-medicas-app-backend/coverage/
 *.launch
 .settings/
 *.sublime-workspace
+.history/
 
 # Visual Studio Code
 .vscode/*
@@ -63,8 +61,6 @@ citas-medicas-app-backend/coverage/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-!.vscode/mcp.json
-.history/
 
 # Miscellaneous
 .sass-cache/
