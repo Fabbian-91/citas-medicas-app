@@ -247,14 +247,14 @@ Ejemplo de variables necesarias:
 ```env
 MYSQL_ROOT_PASSWORD=root
 MYSQL_DATABASE=sistema_citas_medicas
-MYSQL_USER=fabian
-MYSQL_PASSWORD=1234
+MYSQL_USER=anthony
+MYSQL_PASSWORD=hgau20383
 
 PORT=3000
 DB_HOST=mysql
 DB_PORT=3306
-DB_USERNAME=fabian
-DB_PASSWORD=1234
+DB_USERNAME=anthony
+DB_PASSWORD=hgau20383
 DB_DATABASE=sistema_citas_medicas
 ```
 
