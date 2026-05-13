@@ -242,30 +242,21 @@ Antes de levantar el proyecto con Docker Compose, se debe crear un archivo `.env
 
 Ejemplo de variables necesarias:
 
-# =========================
-# MySQL - Docker
-# =========================
-MYSQL_ROOT_PASSWORD=change_me_root_password
-MYSQL_DATABASE=sistema_citas_medicas
-MYSQL_USER=app_user
-MYSQL_PASSWORD=change_me_app_password
+**`.env.example`**
 
-# =========================
-# App
-# =========================
+```env
+MYSQL_ROOT_PASSWORD=your_root_password
+MYSQL_DATABASE=sistema_citas_medicas
+MYSQL_USER=your_mysql_user
+MYSQL_PASSWORD=your_mysql_password
+
 PORT=3000
 
-# =========================
-# Database connection
-# =========================
 DB_HOST=mysql
 DB_PORT=3306
-DB_USERNAME=app_user
-DB_PASSWORD=change_me_app_password
+DB_USERNAME=your_mysql_user
+DB_PASSWORD=your_mysql_password
 DB_DATABASE=sistema_citas_medicas
-
-> **Nota:** El archivo `.env` no debe subirse a GitHub. Para compartir la configuración se utiliza `.env.example`.
-
 ---
 
 ## 🐬 Base de datos con Docker
