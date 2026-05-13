@@ -9,7 +9,6 @@
   <img src="https://img.shields.io/badge/JWT-Seguridad-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" />
   <img src="https://img.shields.io/badge/Estado-Funcional-success?style=for-the-badge" />
 </p>
-
 ---
 
 ## 📌 Descripción del proyecto
